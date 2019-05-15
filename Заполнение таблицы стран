@@ -1,0 +1,1 @@
+INSERT INTO `country_list` (`id_coutry`, `coutry`) VALUES (NULL, 'Россия'), (NULL, 'Швеция'), (NULL, 'Швейцария'), (NULL, 'Чехия'), (NULL, 'Германия'), (NULL, 'Польша');

@@ -1,0 +1,1 @@
+CREATE TABLE `country_of_world`.`cities_list` ( `id_coutry` INT(10) NOT NULL , `city` VARCHAR(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL ) ENGINE = InnoDB;

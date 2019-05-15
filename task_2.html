@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Задача №2</title>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+	</head>
+   
+	<body>
+		<div class="container mt-3">
+			<div class="btn-group">
+				<button class="btn btn-secondary dropdown-toggle"
+				   type="button"
+				   id="dropdownMenuButton" data-toggle="dropdown">
+				 Страны
+				</button>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" href="http://shvg.tk/task_2/Россия">Россия</a>
+					<a class="dropdown-item" href="http://shvg.tk/task_2/Швеция">Швеция</a>
+					<a class="dropdown-item" href="http://shvg.tk/task_2/Швейцария">Швейцария</a>
+					<a class="dropdown-item" href="http://shvg.tk/task_2/Чехия">Чехия</a>
+					<a class="dropdown-item" href="http://shvg.tk/task_2/Германия">Германия</a>
+					<a class="dropdown-item" href="http://shvg.tk/task_2/Польша">Польша</a>
+				</div>
+			</div>
+		</div>
+	  
+		{% if data %}
+		{{ data | safe }}
+		{% else %}
+		 Выберите страну.
+		{% endif %}
+	
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+	</body>
+	
+</html>
