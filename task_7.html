@@ -1,0 +1,172 @@
+﻿<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Задача №7</title>
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+	  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	  <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=24e97240-4253-4403-b434-c012df596fb8" type="text/javascript"></script>
+ 
+	
+	
+   </head>
+   <body>
+       <div class="btn-group">
+				
+			<input type="text" name="country" id='search'>
+			<div id='ward'>
+			<a class="btn btn-secondary" id='forward'>Вперед</a>
+			<a class="btn btn-secondary" id='backward'>Назад</a>
+			</div>
+        </div>
+			
+	<br/>
+	<br/>
+	<script>
+	var cities_new ;
+	var city =[];
+	ymaps.ready(init)
+	function init() {
+    var myMap = new ymaps.Map("map", {
+            center: [56.85237874030841,53.20274949999994],
+            zoom: 4,
+			controls: ['zoomControl'],
+			behaviors: ['drag']
+        }, {
+            searchControlProvider: 'yandex#search'
+        });
+	
+	var next_part = 0, previous_part = 0, country;
+		$(document).ready(function(){
+			$('#search').bind("change keyup input click", function() {
+				if(this.value.length >= 1) {
+					var gos = this.value;          
+					$.ajax({
+						type: 'get',
+						url: '/task_6',
+						data: 'country=' + gos,
+						success: function(response) {
+							var json = jQuery.parseJSON(response)
+							$('#data').html(json.data)
+							city = json.data.split('<br/>')
+							next_part = json.next_part
+							previous_part = json.previous_part
+							country = json.country
+							console.log(response);
+							objectsMap ();					
+						},
+						error: function(error) {
+							console.log(error);
+						}
+					});
+				}
+			})
+		})
+		
+		document.getElementById('ward').onclick = function () {
+			var tag_id = event.target.id, nb;     
+			if (tag_id == 'forward') {
+			nb = '&next_block=' + next_part
+			}
+			else {
+			nb = '&next_block=' + previous_part
+			}
+			$.ajax({
+                type: 'get',
+                url: '/task_6',
+                data: 'country=' + country + nb,
+                success: function(response) {
+                    var json = jQuery.parseJSON(response)
+                    $('#data').html(json.data)
+					city = json.data.split('<br/>')
+					next_part = json.next_part
+					previous_part = json.previous_part
+					country = json.country
+                    console.log(response);
+					objectsMap ();
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+		};
+		
+	
+		function objectsMap () {
+			myMap.geoObjects.removeAll();
+			ymaps.geocode(city[0], {
+			results: 1
+			}).then(function (res) {
+				var firstGeoObject = res.geoObjects.get(0),
+					coords = firstGeoObject.geometry.getCoordinates(),
+					bounds = firstGeoObject.properties.get('boundedBy');
+					
+				firstGeoObject.options.set('preset', 'islands#darkBlueDotIconWithCaption');
+				firstGeoObject.properties.set('iconCaption', firstGeoObject.getAddressLine());
+				myMap.geoObjects.add(firstGeoObject);
+				});
+
+			ymaps.geocode(city[1], {
+			results: 1
+			}).then(function (res) {
+				var secondGeoObject = res.geoObjects.get(0),
+					coords = secondGeoObject.geometry.getCoordinates(),
+					bounds = secondGeoObject.properties.get('boundedBy');
+					
+				secondGeoObject.options.set('preset', 'islands#darkBlueDotIconWithCaption');
+				secondGeoObject.properties.set('iconCaption', secondGeoObject.getAddressLine());
+				myMap.geoObjects.add(secondGeoObject);
+				});
+
+			ymaps.geocode(city[2], {
+			results: 1
+			}).then(function (res) {
+				var thirdGeoObject = res.geoObjects.get(0),
+					coords = thirdGeoObject.geometry.getCoordinates(),
+					bounds = thirdGeoObject.properties.get('boundedBy');
+					
+				thirdGeoObject.options.set('preset', 'islands#darkBlueDotIconWithCaption');
+				thirdGeoObject.properties.set('iconCaption', thirdGeoObject.getAddressLine());
+				myMap.geoObjects.add(thirdGeoObject);
+				});
+			
+			ymaps.geocode(city[3], {
+			results: 1
+			}).then(function (res) {
+				var fourthGeoObject = res.geoObjects.get(0),
+					coords = fourthGeoObject.geometry.getCoordinates(),
+					bounds = fourthGeoObject.properties.get('boundedBy');
+					
+				fourthGeoObject.options.set('preset', 'islands#darkBlueDotIconWithCaption');
+				fourthGeoObject.properties.set('iconCaption', fourthGeoObject.getAddressLine());
+				myMap.geoObjects.add(fourthGeoObject);
+				});
+			
+			
+			ymaps.geocode(city[4], {
+			results: 1
+			}).then(function (res) {
+				var fifthGeoObject = res.geoObjects.get(0),
+					coords = fifthGeoObject.geometry.getCoordinates(),
+					bounds = fifthGeoObject.properties.get('boundedBy');
+					
+				fifthGeoObject.options.set('preset', 'islands#darkBlueDotIconWithCaption');
+				fifthGeoObject.properties.set('iconCaption', fifthGeoObject.getAddressLine());
+				myMap.geoObjects.add(fifthGeoObject);
+				});
+		};
+	};
+	</script>
+	
+	<style>
+        html, body, #map {
+            width: 100%; height: 90%; padding: 0; margin: 0;
+        }
+
+    </style>
+		<div id="data"></div>
+		<div id="map"></div>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+   </body>
+</html>
