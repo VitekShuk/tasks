@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
    <head>
       <meta charset="utf-8">
@@ -6,18 +6,14 @@
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
 	  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 	  <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=24e97240-4253-4403-b434-c012df596fb8" type="text/javascript"></script>
- 
-	
-	
    </head>
    <body>
-       <div class="btn-group">
-				
-			<input type="text" name="country" id='search'>
-			<div id='ward'>
+       <div class="btn-group">	
+	<input type="text" name="country" id='search'>
+		<div id='ward'>
 			<a class="btn btn-secondary" id='forward'>Вперед</a>
 			<a class="btn btn-secondary" id='backward'>Назад</a>
-			</div>
+		</div>
         </div>
 			
 	<br/>
@@ -91,7 +87,6 @@
             });
 		};
 		
-	
 		function objectsMap () {
 			myMap.geoObjects.removeAll();
 			ymaps.geocode(city[0], {
