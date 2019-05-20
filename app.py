@@ -169,5 +169,9 @@ def task_6_cities():
 		
 	return json.dumps({'data': data_str, 'next_part': next_part , 'previous_part': previous_part, 'country': country })
 
+@app.route('/task_7.html')
+def task_7():
+	return render_template ('task_7.html')
+
 if __name__ == '__main__':
 	application.run()
